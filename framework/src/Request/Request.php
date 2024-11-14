@@ -13,7 +13,6 @@ class Request implements RequestInterface
     private string $protocolVersion = '1.1';
     private array $headers = [];
     private StreamInterface $body;
-    private string $method;
     private UriInterface $uri;
 
     public function getProtocolVersion(): string

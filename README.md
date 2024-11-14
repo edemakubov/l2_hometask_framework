@@ -36,6 +36,8 @@ You can run the code analysis tools on your codebase by running:
 docker exec task_2_framework-server-1 composer phpstan
 ```
 
-2. 
-
+2. Psalm
+```bash
+docker exec task_2_framework-server-1 composer psalm
+```
 
