@@ -1,0 +1,29 @@
+{
+    "name": "edem_yakubov/task_2_framework",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/",
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "edemakubov",
+            "email": "edem_yakubov@epam.com"
+        }
+    ],
+    "require": {
+        "psr/http-factory": "^1.1",
+        "psr/container": "^2.0"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.0",
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "vimeo/psalm": "^5.26"
+    },
+    "scripts": {
+        "phpstan": "phpstan analyse app/ src/",
+        "psalm": "./vendor/bin/psalm"
+    }
+}

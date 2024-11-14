@@ -1,0 +1,15 @@
+### GET Main page
+GET http://localhost:4321/
+###
+
+### GET About page
+GET http://localhost:4321/about
+###
+
+
+### GET Contacts page
+GET http://localhost:4321/contact
+###
+
+### POST Contact form
+POST http://localhost:4321/contact

@@ -1,0 +1,8 @@
+services:
+  server:
+    build:
+      context: .
+    ports:
+      - 4321:80
+    volumes:
+      - ./framework:/var/www/html
