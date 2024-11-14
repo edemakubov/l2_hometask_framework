@@ -15,6 +15,11 @@
       <PhpCSFixerConfiguration tool_path="$PROJECT_DIR$/framework/vendor/bin/php-cs-fixer" />
     </phpcsfixer_settings>
   </component>
+  <component name="PhpCodeSniffer">
+    <phpcs_settings>
+      <PhpCSConfiguration beautifier_path="$PROJECT_DIR$/framework/vendor/bin/phpcbf" tool_path="$PROJECT_DIR$/framework/vendor/bin/phpcs" />
+    </phpcs_settings>
+  </component>
   <component name="PhpIncludePathManager">
     <include_path>
       <path value="$PROJECT_DIR$/framework/vendor/composer" />
@@ -68,6 +73,7 @@
       <path value="$PROJECT_DIR$/framework/vendor/webmozart/assert" />
       <path value="$PROJECT_DIR$/framework/vendor/felixfbecker/advanced-json-rpc" />
       <path value="$PROJECT_DIR$/framework/vendor/felixfbecker/language-server-protocol" />
+      <path value="$PROJECT_DIR$/framework/vendor/squizlabs/php_codesniffer" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.3" />

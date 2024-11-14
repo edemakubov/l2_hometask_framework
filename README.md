@@ -41,3 +41,7 @@ docker exec task_2_framework-server-1 composer phpstan
 docker exec task_2_framework-server-1 composer psalm
 ```
 
+3. PHP_CodeSniffer
+```bash
+docker exec task_2_framework-server-1 composer php-code-sniffer
+```

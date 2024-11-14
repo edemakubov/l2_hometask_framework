@@ -2,6 +2,10 @@ FROM php:8.3-apache
 
 RUN a2enmod rewrite
 
+RUN apt-get update && apt-get install -y \
+    zip \
+    unzip \
+    git
 # Copy app files from the app directory.
 COPY ./framework /var/www/html
 
@@ -19,9 +23,6 @@ RUN echo "<Directory /var/www/html>\n\
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN composer install --working-dir=/var/www/html
 
-# Set permissions for Psalm cache directory
-RUN mkdir -p /var/www/html/cache \
-    && chown -R www-data:www-data /var/www/html/cache \
-    && chmod -R 755 /var/www/html/cache
+
 
 USER www-data
