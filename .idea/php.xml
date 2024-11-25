@@ -74,6 +74,8 @@
       <path value="$PROJECT_DIR$/framework/vendor/felixfbecker/advanced-json-rpc" />
       <path value="$PROJECT_DIR$/framework/vendor/felixfbecker/language-server-protocol" />
       <path value="$PROJECT_DIR$/framework/vendor/squizlabs/php_codesniffer" />
+      <path value="$PROJECT_DIR$/framework/vendor/symfony/polyfill-php83" />
+      <path value="$PROJECT_DIR$/framework/vendor/symfony/http-foundation" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.3" />

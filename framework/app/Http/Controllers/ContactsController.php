@@ -4,26 +4,20 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use Src\Response\Response;
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ContactsController
 {
-    public function indexAction(RequestInterface $request): ResponseInterface
+    public function indexAction(Request $request, Response $response): Response
     {
-        echo 'Contacts Index';
-        echo 'Some Address';
-        echo 'Some Phone';
-
-        return new Response(200, 'OK');
+        return $response->setContent('Hello World');
     }
 
-    public function storeAction(RequestInterface $request): ResponseInterface
+    public function aboutAction(Request $request, Response $response): Response
     {
-        echo 'Store Contact';
-
-        return new Response(200, 'OK');
+        return $response->setContent('Hello World');
     }
 
 }

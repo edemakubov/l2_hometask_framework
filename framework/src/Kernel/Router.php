@@ -2,26 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Src\Kernel;
+namespace Framework\Kernel;
 
 use Psr\Container\ContainerInterface;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseFactoryInterface;
-use Psr\Http\Message\ResponseInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class Router
 {
-
     public function __construct(
-        private readonly array $routes,
-        private readonly ContainerInterface $container,
-        private readonly ResponseFactoryInterface $responseFactory)
+        private readonly array              $routes,
+        private readonly ContainerInterface $container
+    )
     {
     }
 
-    public function dispatch(RequestInterface $request): ResponseInterface
+    public function dispatch(Request $request, Response $response): Response
     {
-        $path = $request->getUri()->getPath();
+        $path = $request->getPathInfo();
         $method = $request->getMethod();
 
         foreach ($this->routes as $route) {
@@ -30,11 +28,11 @@ class Router
                 $action = $route['action'];
 
                 if (method_exists($controller, $action)) {
-                    return $controller->$action($request);
+                    return $controller->$action($request, $response);
                 }
             }
         }
 
-        return $this->responseFactory->createResponse(404, 'Not Found');
+        return $response->setStatusCode(404);
     }
 }

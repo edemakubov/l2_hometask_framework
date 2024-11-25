@@ -1,32 +1,28 @@
 <?php
 
-use Src\Container\Container;
-use Src\Kernel\Router;
-use Src\Request\Request;
-use Src\Request\Stream;
-use Src\Request\Uri;
-use Src\Response\ResponseFactory;
+use Framework\Container\Container;
+use Framework\Kernel\Router;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-$container = new Container();
-$responseFactory = new ResponseFactory();
 
 $routes = require __DIR__ . '/../app/routes.php';
 
 //very simple DI container & routing. Can be changed to a more complex one if needed
+$container = new Container();
 
 foreach ($routes as $route) {
     $controllerName = $route['controller'];
     $container->set($controllerName, "App\\Http\\Controllers\\$controllerName");
 }
 
+$container->set('App\\Services\\HomeService', 'App\\Services\\HomeService');
 
 // Create a new instance of the Router class
-$router = new Router($routes, $container, $responseFactory);
+$router = new Router($routes, $container);
 
 
-$request = new Request();
-$request = $request->withUri(new Uri())
-    ->withBody(new Stream());
+$request = Request::createFromGlobals();
+$response = new Response();
 
-return $router->dispatch($request);
-
+$router->dispatch($request, $response)->send();

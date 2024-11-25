@@ -4,22 +4,24 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use Src\Response\Response;
+use App\Services\HomeService;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class HomeController
 {
 
-    public function indexAction(RequestInterface $request): ResponseInterface
+    public function __construct(private readonly HomeService $homeService)
     {
-        echo 'Home Index';
-        return new Response(200, 'OK');
     }
 
-    public function aboutAction(): ResponseInterface
+    public function indexAction(Request $request, Response $response): Response
     {
-        echo 'About Index';
-        return new Response(200, 'OK');
+        return $response->setContent($this->homeService->index());
+    }
+
+    public function aboutAction(Request $request, Response $response): Response
+    {
+        return $response->setContent('About Index');
     }
 }
