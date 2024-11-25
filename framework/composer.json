@@ -3,9 +3,9 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Framework\\": "src/",
             "App\\": "app/",
-            "Tests\\": "tests/"
+            "Framework\\": "src/",
+            "Tests\\": "tests"
         }
     },
     "authors": [

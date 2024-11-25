@@ -22,6 +22,6 @@ class HomeController
 
     public function aboutAction(Request $request, Response $response): Response
     {
-        return $response->setContent('About Index');
+        return $response->setContent($this->homeService->about());
     }
 }

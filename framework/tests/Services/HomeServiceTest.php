@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Services;
 
 use App\Services\HomeService;
 use PHPUnit\Framework\TestCase;
 
-class IndexServiceTest extends TestCase
+class HomeServiceTest extends TestCase
 {
     public function testIndexReturnsHelloWorld()
     {
