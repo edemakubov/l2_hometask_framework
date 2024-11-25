@@ -4,7 +4,8 @@
     "autoload": {
         "psr-4": {
             "Framework\\": "src/",
-            "App\\": "app/"
+            "App\\": "app/",
+            "Tests\\": "tests/"
         }
     },
     "authors": [
@@ -22,7 +23,8 @@
         "phpstan/phpstan": "^2.0",
         "friendsofphp/php-cs-fixer": "^3.64",
         "vimeo/psalm": "^5.26",
-        "squizlabs/php_codesniffer": "^3.11"
+        "squizlabs/php_codesniffer": "^3.11",
+        "phpunit/phpunit": "^10.5"
     },
     "scripts": {
         "phpstan": "phpstan analyse app/ src/",
