@@ -33,15 +33,21 @@ You can run the code analysis tools on your codebase by running:
 
 1. PHPStan
 ```bash
-docker exec task_2_framework-server-1 composer phpstan
+docker exec l2_hometask_framework-server-1 composer phpstan
 ```
 
 2. Psalm
 ```bash
-docker exec task_2_framework-server-1 composer psalm
+docker exec l2_hometask_framework-server-1 composer psalm
 ```
 
 3. PHP_CodeSniffer
 ```bash
-docker exec task_2_framework-server-1 composer php-code-sniffer
+docker exec l2_hometask_framework-server-1 composer php-code-sniffer
+```
+
+
+4. Tests
+```bash
+docker exec l2_hometask_framework-server-1 composer test
 ```

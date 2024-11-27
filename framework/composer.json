@@ -29,6 +29,7 @@
     "scripts": {
         "phpstan": "phpstan analyse app/ src/",
         "psalm": "./vendor/bin/psalm --no-cache app/",
-        "php-code-sniffer": "./vendor/bin/phpcs ./app"
+        "php-code-sniffer": "./vendor/bin/phpcs ./app",
+        "test": "./vendor/bin/phpunit tests"
     }
 }
