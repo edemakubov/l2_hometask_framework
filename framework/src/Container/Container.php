@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Framework\Container;
+namespace Src\Container;
 
 use Psr\Container\ContainerInterface;
 use ReflectionClass;
 use ReflectionException;
-use Framework\Container\Exceptions\DependencyHasNoDefaultValueException;
-use Framework\Container\Exceptions\DependencyIsNotInstantiableException;
-use Framework\Container\Exceptions\NotFoundContainerException;
+use Src\Container\Exceptions\DependencyHasNoDefaultValueException;
+use Src\Container\Exceptions\DependencyIsNotInstantiableException;
+use Src\Container\Exceptions\NotFoundContainerException;
 
 class Container implements ContainerInterface
 {

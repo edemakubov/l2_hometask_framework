@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Framework\Kernel;
+namespace Src\Kernel;
 
 use Psr\Container\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +12,8 @@ class Router
 {
     public function __construct(
         private readonly array              $routes,
-        private readonly ContainerInterface $container
+        private readonly ContainerInterface $container,
+        private array $globalMiddleware = []
     )
     {
     }
@@ -27,9 +28,21 @@ class Router
                 $controller = $this->container->get($route['controller']);
                 $action = $route['action'];
 
-                if (method_exists($controller, $action)) {
-                    return $controller->$action($request, $response);
+                $middlewareStack = new MiddlewareStack();
+
+                // Add global middleware
+                foreach ($this->globalMiddleware as $middleware) {
+                    $middlewareStack->add($this->container->get($middleware));
                 }
+
+                // Add route-specific middleware
+                foreach ($route['middleware'] as $middleware) {
+                    $middlewareStack->add($middleware);
+                }
+
+                return $middlewareStack->handle($request, $response, function($request, $response) use ($controller, $action) {
+                    return $controller->$action($request, $response);
+                });
             }
         }
 

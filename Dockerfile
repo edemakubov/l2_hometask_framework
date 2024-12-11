@@ -21,7 +21,7 @@ RUN echo "<Directory /var/www/html>\n\
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-RUN composer install --working-dir=/var/www/html
+RUN composer install && composer dump-autoload --working-dir=/var/www/html
 
 
 

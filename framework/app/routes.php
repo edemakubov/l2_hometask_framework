@@ -9,27 +9,40 @@ return [
         'path' => '/',
         'method' => 'GET',
         'controller' => 'HomeController',
-        'action' => 'indexAction'
+        'action' => 'indexAction',
+        'middleware' => []
     ],
 
     [
         'path' => '/about',
         'method' => 'GET',
         'controller' => 'HomeController',
-        'action' => 'aboutAction'
+        'action' => 'aboutAction',
+        'middleware' => []
     ],
 
     [
         'path' => '/contact',
         'method' => 'GET',
         'controller' => 'ContactsController',
-        'action' => 'indexAction'
+        'action' => 'indexAction',
+        'middleware' => []
     ],
 
     [
         'path' => '/contact',
         'method' => 'POST',
         'controller' => 'ContactsController',
-        'action' => 'storeAction'
+        'action' => 'storeAction',
+        'middleware' => []
+    ],
+
+
+    [
+        'path' => '/login',
+        'method' => 'POST',
+        'controller' => 'AuthController',
+        'action' => 'login',
+        'middleware' => []
     ]
 ];

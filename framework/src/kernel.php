@@ -1,9 +1,16 @@
 <?php
 
-use Framework\Container\Container;
-use Framework\Kernel\Router;
+use Src\Container\Container;
+use Src\Kernel\MiddlewareStack;
+use Src\Kernel\Router;
+use Src\Middleware\AuthMiddleware;
+use Src\Middleware\CsrfMiddleware;
+use Src\Middleware\SessionMiddleware;
+use Src\Middleware\XssProtectionMiddleware;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
+//create a middleware to handle the request and response
 
 
 $container = new Container();
@@ -23,9 +30,24 @@ foreach (new DirectoryIterator($serviceDir) as $fileInfo) {
     $container->set($className, $className);
 }
 
-// Create a new instance of the Router class
-$router = new Router($routes, $container);
+$container->set('middlewareStack', MiddlewareStack::class);
+
+$container->set(SessionMiddleware::class, SessionMiddleware::class);
+$container->set(CsrfMiddleware::class, CsrfMiddleware::class);
+$container->set(XssProtectionMiddleware::class, XssProtectionMiddleware::class);
+$container->set(AuthMiddleware::class, AuthMiddleware::class);
+
+
+$globalMiddleware = [
+    SessionMiddleware::class,
+    CsrfMiddleware::class,
+    XssProtectionMiddleware::class
+];
+
+$router = new Router($routes, $container, $globalMiddleware);
 $request = Request::createFromGlobals();
 $response = new Response();
 
-$router->dispatch($request, $response)->send();
+$response = $router->dispatch($request, $response);
+
+$response->send();

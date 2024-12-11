@@ -13,3 +13,13 @@ GET http://localhost:4321/contact
 
 ### POST Contact form
 POST http://localhost:4321/contact
+
+
+### Post Login form
+POST http://localhost:4321/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}
