@@ -7,8 +7,11 @@ use App\Services\DataClasses\LoginData;
 
 class AuthService
 {
+
     public function login(LoginData $data): array
     {
+        $_SESSION['user_id'] = $data->getEmail();
+        $_SESSION['user_role'] = 'admin';
         return $data->asArray();
     }
 

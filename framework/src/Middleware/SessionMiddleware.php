@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 namespace Src\Middleware;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +18,11 @@ class SessionMiddleware implements MiddlewareInterface
 
         // Call the next middleware/controller
         $response = $next($request, $response);
+
+        // Save session data to a cookie
+        foreach ($_SESSION as $key => $value) {
+            setcookie($key, serialize($value), time() + 3600, "/");
+        }
 
         // Save and close the session
         session_write_close();

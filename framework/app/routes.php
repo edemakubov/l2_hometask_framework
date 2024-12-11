@@ -37,12 +37,19 @@ return [
         'middleware' => []
     ],
 
-
     [
         'path' => '/login',
         'method' => 'POST',
         'controller' => 'AuthController',
-        'action' => 'login',
+        'action' => 'loginAction',
+        'middleware' => []
+    ],
+
+    [
+        'path' => '/loginform',
+        'method' => 'GET',
+        'controller' => 'AuthController',
+        'action' => 'loginForm',
         'middleware' => []
     ]
 ];
