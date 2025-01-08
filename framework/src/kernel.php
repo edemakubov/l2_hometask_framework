@@ -1,6 +1,7 @@
 <?php
 
 use Src\Container\Container;
+use Src\Kernel\DatabaseConnection;
 use Src\Kernel\MiddlewareStack;
 use Src\Kernel\Router;
 use Src\Middleware\AuthMiddleware;
@@ -30,6 +31,15 @@ foreach (new DirectoryIterator($serviceDir) as $fileInfo) {
     $container->set($className, $className);
 }
 
+$serviceDir = __DIR__ . '/../app/Repositories';
+foreach (new DirectoryIterator($serviceDir) as $fileInfo) {
+    if ($fileInfo->isDot() || $fileInfo->getExtension() !== 'php') {
+        continue;
+    }
+    $className = 'App\\Repositories\\' . $fileInfo->getBasename('.php');
+    $container->set($className, $className);
+}
+
 $container->set('middlewareStack', MiddlewareStack::class);
 
 $container->set(SessionMiddleware::class, SessionMiddleware::class);
@@ -37,6 +47,9 @@ $container->set(CsrfMiddleware::class, CsrfMiddleware::class);
 $container->set(XssProtectionMiddleware::class, XssProtectionMiddleware::class);
 $container->set(AuthMiddleware::class, AuthMiddleware::class);
 
+$container->set(DatabaseConnection::class, function() {
+    return new DatabaseConnection('postgres', 5432, 'mydatabase', 'myuser', 'mypassword');
+});
 
 $globalMiddleware = [
     SessionMiddleware::class,

@@ -51,5 +51,13 @@ return [
         'controller' => 'AuthController',
         'action' => 'loginForm',
         'middleware' => []
+    ],
+
+    [
+        'path' => '/users',
+        'method' => 'GET',
+        'controller' => 'UsersController',
+        'action' => 'index',
+        'middleware' => []
     ]
 ];
