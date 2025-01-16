@@ -37,4 +37,5 @@ class InventoryRepository extends Repository
         $query->execute(['id' => $id]);
     }
 
+
 }

@@ -5,10 +5,27 @@ namespace Src\Container;
 use Closure;
 use Exception;
 use Psr\Container\ContainerInterface;
+use Src\TemplateEngine;
 
 class Container implements ContainerInterface
 {
     private array $instances = [];
+
+
+
+    public function __construct()
+    {
+        $this->registerServices();
+    }
+
+    private function registerServices(): void
+    {
+        $this->set(TemplateEngine::class, function () {
+            return new TemplateEngine(__DIR__ . '/../../app/templates');
+        });
+
+    }
+
 
     public function set(string $id, $concrete): void
     {
