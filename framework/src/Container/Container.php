@@ -6,11 +6,12 @@ use Closure;
 use Exception;
 use Psr\Container\ContainerInterface;
 use Src\TemplateEngine;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class Container implements ContainerInterface
 {
     private array $instances = [];
-
 
 
     public function __construct()
@@ -20,9 +21,9 @@ class Container implements ContainerInterface
 
     private function registerServices(): void
     {
-        $this->set(TemplateEngine::class, function () {
-            return new TemplateEngine(__DIR__ . '/../../app/templates');
-        });
+        $this->set(SessionInterface::class, fn() => new Session());
+
+        $this->set(TemplateEngine::class, fn() => new TemplateEngine(__DIR__ . '/../../app/templates'));
 
     }
 
@@ -96,5 +97,16 @@ class Container implements ContainerInterface
         }
 
         throw new Exception("Cannot resolve the unknown dependency {$parameter->name}.");
+    }
+
+    public static function getInstance(): self
+    {
+        static $instance = null;
+
+        if ($instance === null) {
+            $instance = new self();
+        }
+
+        return $instance;
     }
 }

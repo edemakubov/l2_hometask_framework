@@ -53,13 +53,14 @@ $container->set(DatabaseConnection::class, function() {
 
 $globalMiddleware = [
     SessionMiddleware::class,
-    CsrfMiddleware::class,
+//    CsrfMiddleware::class,
     XssProtectionMiddleware::class
 ];
 
 $router = new Router($routes, $container, $globalMiddleware);
 $request = Request::createFromGlobals();
 $response = new Response();
+
 
 $response = $router->dispatch($request, $response);
 

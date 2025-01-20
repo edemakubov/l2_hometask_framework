@@ -1,32 +1,35 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Src\Middleware;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class SessionMiddleware implements MiddlewareInterface
 {
+    private SessionInterface $session;
+
+    public function __construct(SessionInterface $session)
+    {
+        $this->session = $session;
+    }
+
     public function handle(Request $request, Response $response, callable $next): Response
     {
-        // Start the session
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
+        $this->getSession();
+
+        $request->setSession($this->session);
+
+        return $next($request, $response);
+    }
+
+    private function getSession(): SessionInterface
+    {
+        if (!$this->session->isStarted()) {
+            $this->session->start();
         }
 
-        // Call the next middleware/controller
-        $response = $next($request, $response);
-
-        // Save session data to a cookie
-        foreach ($_SESSION as $key => $value) {
-            setcookie($key, serialize($value), time() + 3600, "/");
-        }
-
-        // Save and close the session
-        session_write_close();
-
-        return $response;
+        return $this->session;
     }
 }

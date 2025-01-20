@@ -4,6 +4,9 @@
  * Routes are defined here.
  * Each route is an array with the following
  */
+
+use Src\Middleware\AuthMiddleware;
+
 return [
     [
         'path' => '/',
@@ -46,6 +49,23 @@ return [
     ],
 
     [
+        'path' => '/register',
+        'method' => 'POST',
+        'controller' => 'AuthController',
+        'action' => 'registerAction',
+        'middleware' => []
+    ],
+
+
+    [
+        'path' => '/logout',
+        'method' => 'GET',
+        'controller' => 'AuthController',
+        'action' => 'logoutAction',
+        'middleware' => []
+    ],
+
+    [
         'path' => '/loginform',
         'method' => 'GET',
         'controller' => 'AuthController',
@@ -54,10 +74,42 @@ return [
     ],
 
     [
+        'path' => '/registerform',
+        'method' => 'GET',
+        'controller' => 'AuthController',
+        'action' => 'registerForm',
+        'middleware' => []
+    ],
+
+    [
         'path' => '/users',
         'method' => 'GET',
         'controller' => 'UsersController',
         'action' => 'index',
+        'middleware' => []
+    ],
+
+    [
+        'path' => '/cart',
+        'method' => 'GET',
+        'controller' => 'CartController',
+        'action' => 'index',
+        'middleware' => []
+    ],
+
+    [
+        'path' => '/cart/add',
+        'method' => 'POST',
+        'controller' => 'CartController',
+        'action' => 'add',
+        'middleware' => []
+    ],
+
+    [
+        'path' => '/cart/delete',
+        'method' => 'POST',
+        'controller' => 'CartController',
+        'action' => 'delete',
         'middleware' => []
     ]
 ];

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use App\Entities\Inventory;
+
 class InventoryRepository extends Repository
 {
     public function create(string $title, string $description, int $price): void
@@ -26,9 +28,31 @@ class InventoryRepository extends Repository
         ]);
     }
 
+    /**
+     * @return array[Inventory::class]
+     */
     public function getList(): array
     {
-        return $this->pdo->query('SELECT * FROM inventory')->fetchAll();
+        $rows = $this->pdo->query('SELECT * FROM inventory')->fetchAll();
+        $inventories = [];
+
+        foreach ($rows as $row) {
+            $inventory = new Inventory();
+            $inventory->setId((int)$row['id']);
+            $inventory->setTitle((string)$row['title']);
+            $inventory->setDescription((string)$row['description']);
+            $inventory->setPrice((int)$row['price']);
+            $inventories[] = $inventory;
+        }
+
+        return $inventories;
+    }
+
+    public function getById(int $id): Inventory
+    {
+        $query = $this->pdo->prepare('SELECT * FROM inventory WHERE id = :id');
+        $query->execute(['id' => $id]);
+        return $query->fetchObject(Inventory::class);
     }
 
     public function delete(int $id): void
@@ -36,6 +60,5 @@ class InventoryRepository extends Repository
         $query = $this->pdo->prepare('DELETE FROM inventory WHERE id = :id');
         $query->execute(['id' => $id]);
     }
-
 
 }
