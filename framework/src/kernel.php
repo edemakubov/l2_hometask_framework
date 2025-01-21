@@ -53,7 +53,7 @@ $container->set(DatabaseConnection::class, function() {
 
 $globalMiddleware = [
     SessionMiddleware::class,
-//    CsrfMiddleware::class,
+    CsrfMiddleware::class,
     XssProtectionMiddleware::class
 ];
 
