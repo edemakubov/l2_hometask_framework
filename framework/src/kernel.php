@@ -46,15 +46,16 @@ $container->set(SessionMiddleware::class, SessionMiddleware::class);
 $container->set(CsrfMiddleware::class, CsrfMiddleware::class);
 $container->set(XssProtectionMiddleware::class, XssProtectionMiddleware::class);
 $container->set(AuthMiddleware::class, AuthMiddleware::class);
+$container->set(Src\Services\JwtService::class, Src\Services\JwtService::class);
 
 $container->set(DatabaseConnection::class, function() {
     return new DatabaseConnection('postgres', 5432, 'mydatabase', 'myuser', 'mypassword');
 });
 
 $globalMiddleware = [
-    SessionMiddleware::class,
+//    SessionMiddleware::class,
 //    CsrfMiddleware::class,
-    XssProtectionMiddleware::class
+//    XssProtectionMiddleware::class
 ];
 
 $router = new Router($routes, $container, $globalMiddleware);

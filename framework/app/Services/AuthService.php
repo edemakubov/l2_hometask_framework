@@ -6,12 +6,16 @@ namespace App\Services;
 use App\Entities\User;
 use App\Repositories\UserRepository;
 use App\Services\DataClasses\LoginData;
+use Exception;
+use Src\Services\JwtService;
 use Symfony\Component\HttpFoundation\Request;
 
 class AuthService
 {
 
-    public function __construct(private readonly UserRepository $repository)
+    public function __construct(
+        private readonly UserRepository $repository,
+        private readonly JwtService     $jwtService)
     {
     }
 
@@ -20,7 +24,7 @@ class AuthService
         $user = $this->repository->findByEmail($data->getEmail());
 
         if (!$user || !$user->checkPassword($data->getPassword())) {
-            throw new \Exception('Invalid credentials');
+            throw new Exception('Invalid credentials');
         }
 
         $this->setSessionForUser($user, $request);
@@ -32,11 +36,11 @@ class AuthService
     {
         $user = $this->repository->findByEmail($data->getEmail());
 
-        if($user) {
-            throw new \Exception('User already exists');
+        if ($user) {
+            throw new Exception('User already exists');
         }
 
-        $user =  $this->repository->create($data);
+        $user = $this->repository->create($data);
 
         $this->setSessionForUser($user, $request);
 
@@ -58,6 +62,22 @@ class AuthService
         $session->set('user_id', $user->getId());
         $session->set('user_email', $user->getEmail());
         $session->set('user_role', $user->getRole()->value);
+    }
+
+
+    public function loginJWT(LoginData $data, Request $response): string
+    {
+        $user = $this->repository->findByEmail($data->getEmail());
+
+        if (!$user || !$user->checkPassword($data->getPassword())) {
+            throw new Exception('Invalid credentials');
+        }
+
+        return $this->jwtService->createToken([
+            'user_id' => $user->getId(),
+            'user_email' => $user->getEmail(),
+            'user_role' => $user->getRole()->value
+        ]);
 
     }
 }

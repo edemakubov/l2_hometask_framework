@@ -6,6 +6,7 @@
  */
 
 use Src\Middleware\AuthMiddleware;
+use Src\Middleware\JwtAuthMiddleware;
 
 return [
     [
@@ -45,6 +46,13 @@ return [
         'method' => 'POST',
         'controller' => 'AuthController',
         'action' => 'loginAction',
+        'middleware' => []
+    ],
+    [
+        'path' => '/login-jwt',
+        'method' => 'POST',
+        'controller' => 'AuthController',
+        'action' => 'loginJwt',
         'middleware' => []
     ],
 
@@ -109,6 +117,38 @@ return [
         'path' => '/cart/delete',
         'method' => 'POST',
         'controller' => 'CartController',
+        'action' => 'delete',
+        'middleware' => []
+    ],
+
+    [
+        'path' => '/api/inventory',
+        'method' => 'GET',
+        'controller' => 'InventoryApiController',
+        'action' => 'index',
+        'middleware' => [new JwtAuthMiddleware(new \Src\Services\JwtService())]
+    ],
+
+    [
+        'path' => '/api/inventory',
+        'method' => 'POST',
+        'controller' => 'InventoryApiController',
+        'action' => 'index',
+        'middleware' => []
+    ],
+
+    [
+        'path' => '/api/inventory',
+        'method' => 'PUT',
+        'controller' => 'InventoryApiController',
+        'action' => 'update',
+        'middleware' => []
+    ],
+
+    [
+        'path' => '/api/inventory',
+        'method' => 'DELETE',
+        'controller' => 'InventoryApiController',
         'action' => 'delete',
         'middleware' => []
     ]

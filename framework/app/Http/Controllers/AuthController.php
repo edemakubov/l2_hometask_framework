@@ -33,6 +33,13 @@ class AuthController
         return $response->setContent($html);
     }
 
+    public function loginJwt(Request $request, Response $response): Response
+    {
+        $secret = $this->authService->loginJWT(LoginData::fromRequest($request->getPayload()), $request);
+        return $response->setContent(json_encode(['token' => $secret]));
+
+    }
+
     public function registerForm(Request $request, Response $response): Response
     {
         $html = $this->templateEngine->render('auth/register');
