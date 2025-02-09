@@ -19,7 +19,7 @@ class JwtService
     public function createToken(array $payload): string
     {
         $issuedAt = time();
-        $expirationTime = $issuedAt + 3600;  // jwt valid for 1 hour from the issued time
+        $expirationTime = $issuedAt + 7200;  // jwt valid for 1 hour from the issued time
         $payload['iat'] = $issuedAt;
         $payload['exp'] = $expirationTime;
 
@@ -29,7 +29,7 @@ class JwtService
     public function validateToken(string $token): array
     {
         try {
-            return (array) JWT::decode($token, new Key($this->secretKey, 'HS256'));
+            return (array) JWT::decode($token, new Key('secret', 'HS256'));
         } catch (\Exception $e) {
             throw new \InvalidArgumentException('Invalid token');
         }

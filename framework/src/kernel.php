@@ -6,13 +6,13 @@ use Src\Kernel\MiddlewareStack;
 use Src\Kernel\Router;
 use Src\Middleware\AuthMiddleware;
 use Src\Middleware\CsrfMiddleware;
+use Src\Middleware\JwtAuthMiddleware;
 use Src\Middleware\SessionMiddleware;
 use Src\Middleware\XssProtectionMiddleware;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 //create a middleware to handle the request and response
-
 
 $container = new Container();
 
@@ -40,13 +40,17 @@ foreach (new DirectoryIterator($serviceDir) as $fileInfo) {
     $container->set($className, $className);
 }
 
+$JwtService = new Src\Services\JwtService();
+$jwtAuthMiddleware = new JwtAuthMiddleware($JwtService);
+
 $container->set('middlewareStack', MiddlewareStack::class);
 
 $container->set(SessionMiddleware::class, SessionMiddleware::class);
 $container->set(CsrfMiddleware::class, CsrfMiddleware::class);
 $container->set(XssProtectionMiddleware::class, XssProtectionMiddleware::class);
 $container->set(AuthMiddleware::class, AuthMiddleware::class);
-$container->set(Src\Services\JwtService::class, Src\Services\JwtService::class);
+$container->set(Src\Services\JwtService::class, $JwtService);
+$container->set(JwtAuthMiddleware::class, $jwtAuthMiddleware);
 
 $container->set(DatabaseConnection::class, function() {
     return new DatabaseConnection('postgres', 5432, 'mydatabase', 'myuser', 'mypassword');

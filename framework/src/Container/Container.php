@@ -53,7 +53,7 @@ class Container implements ContainerInterface
         return isset($this->instances[$id]);
     }
 
-    private function resolve(string $concrete)
+    private function resolve($concrete)
     {
         $reflector = new \ReflectionClass($concrete);
 

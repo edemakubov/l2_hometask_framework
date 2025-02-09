@@ -1,12 +1,14 @@
 <?php
+
 /**
  * @doc
  * Routes are defined here.
  * Each route is an array with the following
  */
 
-use Src\Middleware\AuthMiddleware;
-use Src\Middleware\JwtAuthMiddleware;
+use Src\Middleware\CsrfMiddleware;
+use Src\Middleware\SessionMiddleware;
+use Src\Middleware\XssProtectionMiddleware;
 
 return [
     [
@@ -14,7 +16,11 @@ return [
         'method' => 'GET',
         'controller' => 'HomeController',
         'action' => 'indexAction',
-        'middleware' => []
+        'middleware' => [
+            SessionMiddleware::class,
+            CsrfMiddleware::class,
+            XssProtectionMiddleware::class
+        ]
     ],
 
     [
@@ -126,7 +132,9 @@ return [
         'method' => 'GET',
         'controller' => 'InventoryApiController',
         'action' => 'index',
-        'middleware' => [new JwtAuthMiddleware(new \Src\Services\JwtService())]
+        'middleware' => [
+            \Src\Middleware\JwtAuthMiddleware::class
+        ]
     ],
 
     [
@@ -134,7 +142,10 @@ return [
         'method' => 'POST',
         'controller' => 'InventoryApiController',
         'action' => 'index',
-        'middleware' => []
+        'middleware' => [
+            \Src\Middleware\JwtAuthMiddleware::class
+
+        ]
     ],
 
     [
@@ -142,7 +153,10 @@ return [
         'method' => 'PUT',
         'controller' => 'InventoryApiController',
         'action' => 'update',
-        'middleware' => []
+        'middleware' => [
+            \Src\Middleware\JwtAuthMiddleware::class
+
+        ]
     ],
 
     [
@@ -150,6 +164,9 @@ return [
         'method' => 'DELETE',
         'controller' => 'InventoryApiController',
         'action' => 'delete',
-        'middleware' => []
+        'middleware' => [
+            \Src\Middleware\JwtAuthMiddleware::class
+
+        ]
     ]
 ];

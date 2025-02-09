@@ -18,16 +18,18 @@ class JwtAuthMiddleware implements MiddlewareInterface
 
     public function handle(Request $request, Response $response, callable $next): Response
     {
-        $authHeader = $request->headers->get('Authorization');
+        $authHeader = $request->headers->get('X-Authorization');
+
         if (!$authHeader || !preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
             return new Response('Unauthorized', 401);
         }
 
-        $token = $matches[1];
+        $token = trim($matches[1], '"');
 
         try {
-            $this->jwtService->validateToken($token);
-        } catch (\InvalidArgumentException $e) {
+          $this->jwtService->validateToken($token);
+
+        } catch (\Exception $e) {
             return new Response('Unauthorized', 401);
         }
 

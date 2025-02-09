@@ -9,8 +9,8 @@ Content-Type: application/json
 
 
 ### Inventory
-@jwt_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJ1c2VyX2VtYWlsIjoiZmluX3ByZW1pdW1fb3duZXJAcm9vZnIuY29tIiwidXNlcl9yb2xlIjoidXNlciIsImlhdCI6MTczNzQ2MzU5OCwiZXhwIjoxNzM3NDY3MTk4fQ.UCUNaVxDTRzqoI6gK6lfemS4SQGlQ1PrvPrVK9E040E"
+@jwt_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJ1c2VyX2VtYWlsIjoiZmluX3ByZW1pdW1fb3duZXJAcm9vZnIuY29tIiwidXNlcl9yb2xlIjoidXNlciIsImlhdCI6MTczOTEwODg1NCwiZXhwIjoxNzM5MTEyNDU0fQ.WwZHFvEh17U98wKsadMpnYeDZk8tWgxI2bLkvNTLsuo"
 ## List
 GET http://localhost:4321/api/inventory
 Content-Type: application/json
-Authorization: Bearer {{jwt_token}}
+X-Authorization: Bearer {{jwt_token}}
