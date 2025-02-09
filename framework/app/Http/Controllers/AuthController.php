@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers;
@@ -11,11 +12,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AuthController
 {
-
     public function __construct(
-        private readonly AuthService    $authService,
-        private readonly TemplateEngine $templateEngine)
-    {
+        private readonly AuthService $authService,
+        private readonly TemplateEngine $templateEngine
+    ) {
     }
 
 
@@ -37,7 +37,6 @@ class AuthController
     {
         $secret = $this->authService->loginJWT(LoginData::fromRequest($request->getPayload()), $request);
         return $response->setContent(json_encode(['token' => $secret]));
-
     }
 
     public function registerForm(Request $request, Response $response): Response

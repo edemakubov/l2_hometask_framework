@@ -11,13 +11,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HomeController
 {
-
-    public function __construct
-    (
+    public function __construct(
         private readonly HomeService $homeService,
         private TemplateEngine $templateEngine
-    )
-    {
+    ) {
     }
 
     public function indexAction(Request $request, Response $response): Response

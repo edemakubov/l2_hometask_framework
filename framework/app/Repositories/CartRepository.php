@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Repositories;
@@ -8,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CartRepository extends Repository
 {
-
     public function list(Request $request): array
     {
         $query = $this->pdo->prepare('SELECT
@@ -39,7 +39,6 @@ class CartRepository extends Repository
         }
 
         return $cartItems;
-
     }
 
     public function add(int $userId, int $inventoryId, int $quantity): bool
@@ -59,7 +58,6 @@ class CartRepository extends Repository
             'inventory_id' => $inventoryId,
             'quantity' => $quantity
         ]);
-
     }
 
     public function delete(int $id): bool
@@ -79,5 +77,4 @@ class CartRepository extends Repository
         ]);
         return $query->fetchObject(CartItem::class);
     }
-
 }

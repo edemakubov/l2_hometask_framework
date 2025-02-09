@@ -1,7 +1,9 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Entities;
+
 use App\Constants\UserRoleEnum;
 
 class User

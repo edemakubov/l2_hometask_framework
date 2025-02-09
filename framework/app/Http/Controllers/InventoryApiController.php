@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers;
@@ -9,7 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class InventoryApiController
 {
-
     public function __construct(protected readonly InventoryRepository $repository)
     {
     }
@@ -33,5 +33,4 @@ class InventoryApiController
     {
         return $response->send($this->repository->delete($request->get('id')));
     }
-
 }

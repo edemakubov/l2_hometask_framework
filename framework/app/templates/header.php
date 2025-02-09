@@ -1,4 +1,5 @@
 <?php
+
 //get container
 use Src\Container\Container;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -32,7 +33,6 @@ $session = $container->get(SessionInterface::class);
                     <a class="nav-link" href="/registerform">Register</a>
                 </li>
             <?php } else { ?>
-
                 <li class="nav-item active">
                     <a class="nav-link" href="/cart">Cart</a>
                 </li>

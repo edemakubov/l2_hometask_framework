@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Services;
@@ -12,11 +13,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AuthService
 {
-
     public function __construct(
         private readonly UserRepository $repository,
-        private readonly JwtService     $jwtService)
-    {
+        private readonly JwtService $jwtService
+    ) {
     }
 
     public function login(LoginData $data, Request $request): User
@@ -45,7 +45,6 @@ class AuthService
         $this->setSessionForUser($user, $request);
 
         return $user;
-
     }
 
     public function logout(Request $request): void
@@ -78,6 +77,5 @@ class AuthService
             'user_email' => $user->getEmail(),
             'user_role' => $user->getRole()->value
         ]);
-
     }
 }

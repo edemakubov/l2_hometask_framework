@@ -12,7 +12,7 @@
     </thead>
     <tbody>
 
-    <?php foreach ($items as $key => $item): ?>
+    <?php foreach ($items as $key => $item) : ?>
         <tr>
             <th scope="row"><?= $key ?></th>
             <td><?= $item->getTitle() ?></td>

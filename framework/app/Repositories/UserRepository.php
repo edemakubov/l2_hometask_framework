@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Repositories;
@@ -10,7 +11,6 @@ use Src\Kernel\DatabaseConnection;
 
 class UserRepository extends Repository
 {
-
     public function __construct(DatabaseConnection $connection)
     {
         parent::__construct($connection);

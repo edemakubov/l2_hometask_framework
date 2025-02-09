@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Repositories;
@@ -60,5 +61,4 @@ class InventoryRepository extends Repository
         $query = $this->pdo->prepare('DELETE FROM inventory WHERE id = :id');
         $query->execute(['id' => $id]);
     }
-
 }
