@@ -38,11 +38,3 @@ jobs:
     - name: Run PHPUnit
       run: ./vendor/bin/phpunit --configuration phpunit.xml --coverage-text --coverage-clover=coverage.xml
       working-directory: ./framework
-
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        files: ./framework/coverage.xml
-        flags: unittests
-        name: codecov-umbrella
-        fail_ci_if_error: true
