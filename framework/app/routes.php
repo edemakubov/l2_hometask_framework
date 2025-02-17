@@ -154,7 +154,6 @@ return [
         'action' => 'update',
         'middleware' => [
             \Src\Middleware\JwtAuthMiddleware::class
-
         ]
     ],
 
