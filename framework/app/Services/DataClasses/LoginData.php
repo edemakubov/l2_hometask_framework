@@ -31,4 +31,14 @@ class LoginData
     {
         return $this->password;
     }
+
+
+    public function asArray(): array
+    {
+        return [
+            'email' => $this->email,
+            'password' => $this->password
+        ];
+    }
+
 }

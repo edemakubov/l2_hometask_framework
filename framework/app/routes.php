@@ -6,6 +6,7 @@
  * Each route is an array with the following
  */
 
+
 use Src\Middleware\CsrfMiddleware;
 use Src\Middleware\SessionMiddleware;
 use Src\Middleware\XssProtectionMiddleware;
