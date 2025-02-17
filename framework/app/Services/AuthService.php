@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AuthService
 {
-
     public function __construct(
         private readonly UserRepository $repository,
         private readonly JwtService $jwtService

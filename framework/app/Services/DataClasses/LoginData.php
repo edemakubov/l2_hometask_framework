@@ -40,5 +40,4 @@ class LoginData
             'password' => $this->password
         ];
     }
-
 }

@@ -12,12 +12,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AuthController
 {
-
     public function __construct(
         private readonly AuthService $authService,
         private readonly TemplateEngine $templateEngine
     ) {
-
     }
 
 
@@ -46,7 +44,6 @@ class AuthController
         $html = $this->templateEngine->render('auth/register');
 
         return $response->setContent($html);
-
     }
 
     public function registerAction(Request $request, Response $response): Response

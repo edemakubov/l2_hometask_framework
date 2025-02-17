@@ -15,7 +15,6 @@ class HomeController
         private readonly HomeService $homeService,
         private TemplateEngine $templateEngine
     ) {
-
     }
 
     public function indexAction(Request $request, Response $response): Response
