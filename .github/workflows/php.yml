@@ -24,21 +24,25 @@ jobs:
         coverage: xdebug
 
     - name: Install dependencies
-      run: ./framework/composer install --prefer-dist --no-progress --no-suggest
+      run: composer install --prefer-dist --no-progress --no-suggest
+      working-directory: ./framework
 
     - name: Run PHP CodeSniffer
       run: ./vendor/bin/phpcs --standard=PSR12 ./framework/app
+      working-directory: ./framework
 
     - name: Run PHP Code Beautifier and Fixer
       run: ./vendor/bin/phpcbf --standard=PSR12 ./framework/app
+      working-directory: ./framework
 
     - name: Run PHPUnit
       run: ./vendor/bin/phpunit --configuration phpunit.xml --coverage-text --coverage-clover=coverage.xml
+      working-directory: ./framework
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:
-        files: coverage.xml
+        files: ./framework/coverage.xml
         flags: unittests
         name: codecov-umbrella
         fail_ci_if_error: true
