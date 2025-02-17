@@ -8,6 +8,6 @@ class ContactService
 {
     public function index(): string
     {
-        return 'Contact Service Index';
+        return 'Contact Service  Index';
     }
 }
