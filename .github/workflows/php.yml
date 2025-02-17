@@ -24,7 +24,7 @@ jobs:
         coverage: xdebug
 
     - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
+      run: ./framework/composer install --prefer-dist --no-progress --no-suggest
 
     - name: Run PHP CodeSniffer
       run: ./vendor/bin/phpcs --standard=PSR12 ./framework/app
