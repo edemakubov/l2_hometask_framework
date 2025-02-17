@@ -144,7 +144,6 @@ return [
         'action' => 'index',
         'middleware' => [
             \Src\Middleware\JwtAuthMiddleware::class
-
         ]
     ],
 
