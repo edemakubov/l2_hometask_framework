@@ -28,7 +28,7 @@ class Router
                 $controller = $this->container->get($route['controller']);
                 $action = $route['action'];
 
-                $middlewareStack = new MiddlewareStack();
+                $middlewareStack = new MiddlewareStack($this->container);
 
                 // Add global middleware
                 foreach ($this->globalMiddleware as $middleware) {

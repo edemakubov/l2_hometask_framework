@@ -51,3 +51,23 @@ docker exec l2_hometask_framework-server-1 composer php-code-sniffer
 ```bash
 docker exec l2_hometask_framework-server-1 composer test
 ```
+
+
+
+## Templating Engine
+
+- **HTML Responses**: Use the `TemplateEngine` class to render HTML templates.
+- **JSON Responses**: Use the `json_encode` function to return JSON responses.
+
+## Security Measures
+
+- Output is escaped using `htmlspecialchars` to prevent XSS attacks.
+- Variables are extracted with `EXTR_SKIP` to avoid overwriting existing variables.
+
+## Usage
+
+### HTML Response
+
+```php
+$content = $templateEngine->render('template_name', ['variable' => 'value']);
+$response->setContent($content);

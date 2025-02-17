@@ -17,7 +17,7 @@ class LoginData
     public static function fromRequest(InputBag $getPayload): self
     {
         return new self(
-            email: $getPayload->get('username'),
+            email: $getPayload->get('email'),
             password: $getPayload->get('password')
         );
     }
@@ -31,6 +31,7 @@ class LoginData
     {
         return $this->password;
     }
+
 
     public function asArray(): array
     {

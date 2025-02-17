@@ -1,25 +1,16 @@
-### GET Main page
-GET http://localhost:4321/
-###
-
-### GET About page
-GET http://localhost:4321/about
-###
-
-
-### GET Contacts page
-GET http://localhost:4321/contact
-###
-
-### POST Contact form
-POST http://localhost:4321/contact
-
-
-### Post Login form
-POST http://localhost:4321/login
+### Auth JWT
+POST http://localhost:4321/login-jwt
 Content-Type: application/json
 
 {
-  "username": "admin",
-  "password": "admin"
+  "email": "fin_premium_owner@roofr.com",
+  "password": "testing"
 }
+
+
+### Inventory
+@jwt_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJ1c2VyX2VtYWlsIjoiZmluX3ByZW1pdW1fb3duZXJAcm9vZnIuY29tIiwidXNlcl9yb2xlIjoidXNlciIsImlhdCI6MTczOTEwODg1NCwiZXhwIjoxNzM5MTEyNDU0fQ.WwZHFvEh17U98wKsadMpnYeDZk8tWgxI2bLkvNTLsuo"
+## List
+GET http://localhost:4321/api/inventory
+Content-Type: application/json
+X-Authorization: Bearer {{jwt_token}}
