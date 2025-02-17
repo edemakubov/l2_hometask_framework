@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: mbstring, intl, dom
+        coverage: xdebug
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+
+    - name: Run PHP CodeSniffer
+      run: ./vendor/bin/phpcs --standard=PSR12 ./framework/app
+
+    - name: Run PHP Code Beautifier and Fixer
+      run: ./vendor/bin/phpcbf --standard=PSR12 ./framework/app
+
+    - name: Run PHPUnit
+      run: ./vendor/bin/phpunit --configuration phpunit.xml --coverage-text --coverage-clover=coverage.xml
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        files: coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: true
