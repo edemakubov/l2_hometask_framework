@@ -1,9 +1,11 @@
 <?php
+
 /**
  * @doc
  * Routes are defined here.
  * Each route is an array with the following
  */
+
 return [
     [
         'path' => '/',

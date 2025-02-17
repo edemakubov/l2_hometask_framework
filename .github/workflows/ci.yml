@@ -28,11 +28,11 @@ jobs:
       working-directory: ./framework
 
     - name: Run PHP CodeSniffer
-      run: ./vendor/bin/phpcs --standard=PSR12 ./framework/app
+      run: ./vendor/bin/phpcs --standard=PSR12 ./app
       working-directory: ./framework
 
     - name: Run PHP Code Beautifier and Fixer
-      run: ./vendor/bin/phpcbf --standard=PSR12 ./framework/app
+      run: ./vendor/bin/phpcbf --standard=PSR12 ./app
       working-directory: ./framework
 
     - name: Run PHPUnit

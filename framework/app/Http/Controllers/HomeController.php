@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HomeController
 {
-
     public function __construct(private readonly HomeService $homeService)
     {
     }

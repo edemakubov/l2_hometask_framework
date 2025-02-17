@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Services;
@@ -7,7 +8,6 @@ use App\Services\DataClasses\LoginData;
 
 class AuthService
 {
-
     public function login(LoginData $data): array
     {
         $_SESSION['user_id'] = $data->getEmail();

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers;
@@ -10,7 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AuthController
 {
-
     public function __construct(private readonly AuthService $authService)
     {
     }
@@ -46,11 +46,9 @@ class AuthController
 
     public function register()
     {
-
     }
 
     public function logout()
     {
-
     }
 }
